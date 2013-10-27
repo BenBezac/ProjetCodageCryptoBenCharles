@@ -14,11 +14,11 @@ import java.util.Comparator;
 public class BWT {
     
     private ArrayList<ArrayList<Character>> tableurNonTrie, tableurTrie;
-    private ArrayList<Character> chaine;
-    private String code;
+    private ArrayList<Character> chaine, chaineDecodee, code, codeSort;
     private ArrayList<Integer> position;
     private int positionChaine;
     private final int TAILLEMOT;
+    private String leCode = "";
     private char carac;
 
     
@@ -95,11 +95,58 @@ public class BWT {
     
     public void encodage()
     {
-        code = positionChaine +"";
+        //Ajout de la position du mot de depart
+        //code.add(String.valueOf(positionChaine).charAt(0));
+        leCode = positionChaine +"";
         
+        //Ajout de chaque dernier caractere de chaque ligne du tableur
         for(ArrayList<Character> mot : tableurTrie)
-            code += mot.get(TAILLEMOT-1);
+        {
+            leCode += mot.get(TAILLEMOT-1);
+            code.add(mot.get(TAILLEMOT-1));
+        }
+        
+        System.out.println("Mot encodée : " + leCode);
         System.out.println("Code : " + code);
+        
+        //Trie du code
+        codeSort = new ArrayList<>(code);
+        Collections.sort(codeSort);
+        System.out.println("Code trié : " + codeSort);
+    }
+    
+    public void decodage()
+    {
+        System.out.println("Position :  0  1  2  3  4 ");
+        System.out.println("Code     : " + code);
+        System.out.println("CodeSort : " + codeSort);
+        chaineDecodee = new ArrayList<>(TAILLEMOT);
+        int posi = positionChaine, dernierePos = 0, nbOccu = 1, debut = 0;
+        char c = ' ';
+        
+        for(int i=0 ; i<TAILLEMOT ; i++)
+        {
+            //On regarde la lettre à la position posSort dans codeSort
+            c = codeSort.get(posi);
+
+            //On ajoute cette lettre au début de la chaine décodé
+            chaineDecodee.add(i, c);
+
+            //On regarde l'occurence de cette lettre dans codeSort jusqu'à posSort mais pas au delà --> nbOccu
+            nbOccu = compterRecurrence(codeSort, posi+1, c);System.out.println("Occu de " + c +" " + nbOccu);
+
+            //On récupère la position dans code de cette lettre à la nbOccu ieme fois ( nbOccu = 2 --> donc la 2nde occurence)
+            debut = 0; posi=0;
+            for(int j=0 ; j < nbOccu ; j++)
+            {
+                dernierePos = posi;
+                posi = code.subList(debut, TAILLEMOT).indexOf(c) + dernierePos+1;
+                System.out.println(code.subList(debut, TAILLEMOT));
+                debut = posi+1;
+            }
+        }
+        System.out.println("Chaine décodée : " + chaineDecodee);
+        
     }
     
     /*
@@ -109,9 +156,25 @@ public class BWT {
     {
          tableurNonTrie = new ArrayList<ArrayList<Character>>(TAILLEMOT); 
          position = new ArrayList<Integer>(TAILLEMOT); 
-         code = new String();
+         code = new ArrayList<Character>(TAILLEMOT); 
+         codeSort = new ArrayList<Character>(TAILLEMOT); 
+         chaineDecodee = new ArrayList<Character>(TAILLEMOT); 
          
          positionChaine = 0;
          carac=' ';
+    }
+    
+    public int compterRecurrence(ArrayList<Character> al, int pos, char car)
+    {
+        int cpt = 0,comp = 0;
+        for(char ch : al)
+        {
+            //System.out.println(ch + " vs " + car);
+            if ((car == ch) && (comp <= pos))
+                  cpt++;
+            
+            comp++;
+        }
+        return cpt;
     }
 }
