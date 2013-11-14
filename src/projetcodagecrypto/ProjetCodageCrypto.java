@@ -17,26 +17,32 @@ public class ProjetCodageCrypto {
     
     public static void main(String[] args) {
         ArrayList<Character> test = new ArrayList<>();
-        test.add('X');
+        /*test.add('X');
         test.add('B');
         test.add('D');
         test.add('C');
         test.add('D');
         test.add('D');
         test.add('E');
-        test.add('F');/*
+        test.add('F');*/
+        test.add('L');
+        test.add('E');
+        test.add(' ');
         test.add('T');
         test.add('E');
         test.add('X');
         test.add('T');
-        test.add('E');*/
+        test.add('E');
         BWT b = new BWT(test);
         b.trieTableur();
         b.encodage();
+        
+        System.out.println("\n##################### MVT #####################\n");
+        MoveToFront mvt = new MoveToFront(b.getCode(), b.getPosition());
+        
+        
         System.out.println("\n###############################################\n");
         b.decodage();
-        
-        //MoveToFront mvt = new MoveToFront(b.get);
     }
     
     

@@ -7,30 +7,44 @@ package projetcodagecrypto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
 /**
  *
  * @author Benjamin
  */
-public class BWT {
-    
-    private ArrayList<ArrayList<Character>> tableurNonTrie, tableurTrie;
-    private ArrayList<Character> chaine, chaineDecodee, code, codeSort;
+public class BurrowsWheelerTransform {
+    private ArrayList<ArrayList<Integer>> tableurNonTrie, tableurTrie;
+    private ArrayList<Integer> chaine, chaineDecodee, code, codeSort;
     private ArrayList<Integer> position;
     private int positionChaine;
     private final int TAILLEMOT;
-    private String leCode = "";
-    private char carac;
+    private String leCode = "", motACoder;
+    private int carac;
 
     
-    public BWT(ArrayList<Character> ch)
+    public BurrowsWheelerTransform(String mot)
     {
-        chaine = new ArrayList<>(ch);
-        TAILLEMOT = chaine.size();
+        motACoder = mot;
+        TAILLEMOT = motACoder.length();
+        conversionASCII();
         init();
-        String str = "toto";
         //Ajout du mot dans la premiere ligne du tableur
         tableurNonTrie.add(0,chaine);
         
+    }
+    
+    /*
+     * Converti le mot de type String en type ArrayList de Int pour y stocker les valeurs ASCII des caractères du mot
+     */
+    public void conversionASCII()
+    {
+        char[] tabchar = motACoder.toCharArray();
+        chaine = new ArrayList<>();
+        
+        for( int i=0 ; i < TAILLEMOT ; i++)
+        {
+            chaine.add((int)tabchar[i]);
+        }
     }
     
     /*
@@ -42,18 +56,18 @@ public class BWT {
         //on boucle pour toutes les autres lignes du tableur pour décaler à chaque fois un caractère abc --> cab --> bca
         for(int i=1 ; i < TAILLEMOT ; i++)
         {
-            tableurNonTrie.add(i, new ArrayList<Character>(tableurNonTrie.get(i-1)));
-            carac = (char) tableurNonTrie.get(i).get(TAILLEMOT-1);
+            tableurNonTrie.add(i, new ArrayList<Integer>(tableurNonTrie.get(i-1)));
+            carac = tableurNonTrie.get(i).get(TAILLEMOT-1);
             tableurNonTrie.get(i).remove(TAILLEMOT-1);
             tableurNonTrie.get(i).add(0, carac);
         }
         /*
-         * Permet de comparer deux mots ArrayList<Character> sur chaque lettre
+         * Permet de comparer deux mots ArrayList<Integer> sur chaque lettre
          * Si la première est différente : comparaison, sinon on passe à la 2nde, etc...
          */
-        Comparator<ArrayList<Character>>  myComparator = new Comparator<ArrayList<Character>>() {
+        Comparator<ArrayList<Integer>>  myComparator = new Comparator<ArrayList<Integer>>() {
             @Override
-            public int compare(ArrayList<Character> o1, ArrayList<Character> o2) {
+            public int compare(ArrayList<Integer> o1, ArrayList<Integer> o2) {
                 int col = -1;
                 boolean pasSortie = true;
                 while(pasSortie) //TantQue le caractere est identique on boucle --> texte et tetex on boucle pour te
@@ -64,7 +78,7 @@ public class BWT {
                 return o1.get(col).compareTo(o2.get(col));
             }  
         };
-        tableurTrie = new ArrayList<ArrayList<Character>>(tableurNonTrie);
+        tableurTrie = new ArrayList<ArrayList<Integer>>(tableurNonTrie);
         
         // On trie le tableur avec l'override de compare
         Collections.sort(tableurTrie, myComparator);
@@ -72,7 +86,7 @@ public class BWT {
         position.clear();
         
         //On compare notre tableur et le tableur trié pour connaitre la position initial des mots/lignes
-        for(ArrayList<Character> mot : tableurTrie)
+        for(ArrayList<Integer> mot : tableurTrie)
             position.add(tableurNonTrie.indexOf(mot));
         
         //affichageTableur("Tableur non trié :", tableur);
@@ -84,11 +98,11 @@ public class BWT {
         System.out.println("Position de la chaine de départ \" " + chaine + " \" : " + positionChaine);
     }
     
-    public void affichageTableur(String pretexte, ArrayList<ArrayList<Character>> al)
+    public void affichageTableur(String pretexte, ArrayList<ArrayList<Integer>> al)
     {   
         System.out.println(pretexte);
         System.out.println("[");
-        for(ArrayList<Character> mot : al)
+        for(ArrayList<Integer> mot : al)
             System.out.println("\tPosition : " + al.indexOf(mot) +"(" + tableurNonTrie.indexOf(mot) + ")\t" + mot);
         System.out.println("]");
     }
@@ -100,7 +114,7 @@ public class BWT {
         leCode = positionChaine +"";
         
         //Ajout de chaque dernier caractere de chaque ligne du tableur
-        for(ArrayList<Character> mot : tableurTrie)
+        for(ArrayList<Integer> mot : tableurTrie)
         {
             leCode += mot.get(TAILLEMOT-1);
             code.add(mot.get(TAILLEMOT-1));
@@ -155,17 +169,18 @@ public class BWT {
      */
     public void init()
     {
-         tableurNonTrie = new ArrayList<ArrayList<Character>>(TAILLEMOT); 
+        
+         tableurNonTrie = new ArrayList<ArrayList<Integer>>(TAILLEMOT); 
          position = new ArrayList<Integer>(TAILLEMOT); 
-         code = new ArrayList<Character>(TAILLEMOT); 
-         codeSort = new ArrayList<Character>(TAILLEMOT); 
-         chaineDecodee = new ArrayList<Character>(TAILLEMOT); 
+         code = new ArrayList<Integer>(TAILLEMOT); 
+         codeSort = new ArrayList<Integer>(TAILLEMOT); 
+         chaineDecodee = new ArrayList<Integer>(TAILLEMOT); 
          
          positionChaine = 0;
          carac=' ';
     }
     
-    public ArrayList<Character> getCode()
+    public ArrayList<Integer> getCode()
     {
        return code;
     }

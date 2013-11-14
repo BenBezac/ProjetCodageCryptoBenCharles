@@ -13,9 +13,16 @@ import java.util.ArrayList;
 public class MoveToFront {
     
     private ArrayList<Character> mot;
+    private int position;
     
-    public MoveToFront(ArrayList<Character> m)
+    public MoveToFront(ArrayList<Character> m, int pos)
     {
         mot = new ArrayList<>(m);
+        position = pos;
+    }
+    
+    public void compressionMTV()
+    {
+        
     }
 }
