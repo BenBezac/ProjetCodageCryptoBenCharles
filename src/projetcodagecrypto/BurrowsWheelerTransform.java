@@ -20,11 +20,13 @@ public class BurrowsWheelerTransform {
     private final int TAILLEMOT;
     private String leCode = "", motACoder;
     private int carac;
+    private Ascii ascii;
 
     
-    public BurrowsWheelerTransform(String mot)
+    public BurrowsWheelerTransform(String mot, Ascii as)
     {
         motACoder = mot;
+        ascii = as; 
         TAILLEMOT = motACoder.length();
         conversionASCII();
         init();
@@ -137,8 +139,7 @@ public class BurrowsWheelerTransform {
         System.out.println("Code     : " + code);
         System.out.println("CodeSort : " + codeSort);
         chaineDecodee = new ArrayList<>(TAILLEMOT);
-        int posi = positionChaine, dernierePos = 0, nbOccu = 1;
-        char c = ' ';
+        int posi = positionChaine, dernierePos = 0, nbOccu = 1, c = 0;
         
         for(int i=0 ; i<TAILLEMOT ; i++)
         {
@@ -160,7 +161,14 @@ public class BurrowsWheelerTransform {
                 debut = posi + 1;
             }
         }
+        String chaineDecodeeString = "";
+        for(Integer lettre : chaineDecodee)
+        {
+            chaineDecodeeString += ascii.getTableAscii().get(lettre);
+        }
+        System.out.println("Chaine décodée : " + chaineDecodeeString);
         System.out.println("Chaine décodée : " + chaineDecodee);
+               
         
     }
     

@@ -12,10 +12,10 @@ import java.util.ArrayList;
  */
 public class MoveToFront {
     
-    private ArrayList<Character> mot;
+    private ArrayList<Integer> mot;
     private int position;
     
-    public MoveToFront(ArrayList<Character> m, int pos)
+    public MoveToFront(ArrayList<Integer> m, int pos)
     {
         mot = new ArrayList<>(m);
         position = pos;

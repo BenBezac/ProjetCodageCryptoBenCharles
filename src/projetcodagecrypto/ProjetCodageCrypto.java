@@ -16,24 +16,10 @@ public class ProjetCodageCrypto {
     
     
     public static void main(String[] args) {
-        ArrayList<Character> test = new ArrayList<>();
-        /*test.add('X');
-        test.add('B');
-        test.add('D');
-        test.add('C');
-        test.add('D');
-        test.add('D');
-        test.add('E');
-        test.add('F');*/
-        test.add('L');
-        test.add('E');
-        test.add(' ');
-        test.add('T');
-        test.add('E');
-        test.add('X');
-        test.add('T');
-        test.add('E');
-        BWT b = new BWT(test);
+        Ascii as = new Ascii();
+        as.initAscii();
+        String test = "Maxime";
+        BurrowsWheelerTransform b = new BurrowsWheelerTransform(test, as);
         b.trieTableur();
         b.encodage();
         
@@ -44,7 +30,6 @@ public class ProjetCodageCrypto {
         System.out.println("\n###############################################\n");
         b.decodage();
     }
-    
     
     
   
