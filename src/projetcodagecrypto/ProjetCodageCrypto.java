@@ -36,7 +36,7 @@ public class ProjetCodageCrypto {
         System.out.println("\n###############################################\n");
         b.decodage();
         
-        MoveToFront mvt = new MoveToFront();
+        //MoveToFront mvt = new MoveToFront(b.get);
     }
     
     
