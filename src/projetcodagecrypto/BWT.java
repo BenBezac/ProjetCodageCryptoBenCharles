@@ -31,14 +31,6 @@ public class BWT {
         //Ajout du mot dans la premiere ligne du tableur
         tableurNonTrie.add(0,chaine);
         
-        //on boucle pour toutes les autres lignes du tableur pour décaler à chaque fois un caractère abc --> cab --> bca
-        for(int i=1 ; i < TAILLEMOT ; i++)
-        {
-            tableurNonTrie.add(i, new ArrayList<Character>(tableurNonTrie.get(i-1)));
-            carac = (char) tableurNonTrie.get(i).get(TAILLEMOT-1);
-            tableurNonTrie.get(i).remove(TAILLEMOT-1);
-            tableurNonTrie.get(i).add(0, carac);
-        }
     }
     
     /*
@@ -47,6 +39,14 @@ public class BWT {
     public void trieTableur()
     {
         
+        //on boucle pour toutes les autres lignes du tableur pour décaler à chaque fois un caractère abc --> cab --> bca
+        for(int i=1 ; i < TAILLEMOT ; i++)
+        {
+            tableurNonTrie.add(i, new ArrayList<Character>(tableurNonTrie.get(i-1)));
+            carac = (char) tableurNonTrie.get(i).get(TAILLEMOT-1);
+            tableurNonTrie.get(i).remove(TAILLEMOT-1);
+            tableurNonTrie.get(i).add(0, carac);
+        }
         /*
          * Permet de comparer deux mots ArrayList<Character> sur chaque lettre
          * Si la première est différente : comparaison, sinon on passe à la 2nde, etc...
@@ -109,40 +109,41 @@ public class BWT {
         System.out.println("Mot encodée : " + leCode);
         System.out.println("Code : " + code);
         
-        //Trie du code
-        codeSort = new ArrayList<>(code);
-        Collections.sort(codeSort);
-        System.out.println("Code trié : " + codeSort);
     }
     
     public void decodage()
     {
+        
+        //Trie du code
+        codeSort = new ArrayList<>(code);
+        Collections.sort(codeSort);
+        System.out.println("Code trié : " + codeSort);
+        
         System.out.println("Position :  0  1  2  3  4 ");
         System.out.println("Code     : " + code);
         System.out.println("CodeSort : " + codeSort);
         chaineDecodee = new ArrayList<>(TAILLEMOT);
-        int posi = positionChaine, dernierePos = 0, nbOccu = 1, debut = 0;
+        int posi = positionChaine, dernierePos = 0, nbOccu = 1;
         char c = ' ';
         
         for(int i=0 ; i<TAILLEMOT ; i++)
         {
-            //On regarde la lettre à la position posSort dans codeSort
+            //On regarde la lettre à la position posi dans codeSort
             c = codeSort.get(posi);
 
             //On ajoute cette lettre au début de la chaine décodé
-            chaineDecodee.add(i, c);
+            chaineDecodee.add(c);
 
             //On regarde l'occurence de cette lettre dans codeSort jusqu'à posSort mais pas au delà --> nbOccu
-            nbOccu = compterRecurrence(codeSort, posi+1, c);System.out.println("Occu de " + c +" " + nbOccu);
+            nbOccu = Collections.frequency(codeSort.subList(0, posi+1), c);System.out.println("Occu de " + c +" " + nbOccu);
 
             //On récupère la position dans code de cette lettre à la nbOccu ieme fois ( nbOccu = 2 --> donc la 2nde occurence)
-            debut = 0; posi=0;
+            int debut = 0;
+            
             for(int j=0 ; j < nbOccu ; j++)
             {
-                dernierePos = posi;
-                posi = code.subList(debut, TAILLEMOT).indexOf(c) + dernierePos+1;
-                System.out.println(code.subList(debut, TAILLEMOT));
-                debut = posi+1;
+                posi = code.subList(debut, TAILLEMOT).indexOf(c) + debut;
+                debut = posi + 1;
             }
         }
         System.out.println("Chaine décodée : " + chaineDecodee);
@@ -162,19 +163,5 @@ public class BWT {
          
          positionChaine = 0;
          carac=' ';
-    }
-    
-    public int compterRecurrence(ArrayList<Character> al, int pos, char car)
-    {
-        int cpt = 0,comp = 0;
-        for(char ch : al)
-        {
-            //System.out.println(ch + " vs " + car);
-            if ((car == ch) && (comp <= pos))
-                  cpt++;
-            
-            comp++;
-        }
-        return cpt;
     }
 }
