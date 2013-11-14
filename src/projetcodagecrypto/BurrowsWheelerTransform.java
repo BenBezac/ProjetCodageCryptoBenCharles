@@ -92,12 +92,12 @@ public class BurrowsWheelerTransform {
             position.add(tableurNonTrie.indexOf(mot));
         
         //affichageTableur("Tableur non trié :", tableur);
-        affichageTableur("Tableur trié : ", tableurTrie);
+       // affichageTableur("Tableur trié : ", tableurTrie);
         //System.out.println("Position :\n" + position);
         
         positionChaine = tableurTrie.indexOf(chaine);
         //En partant de 0 et pas de 1
-        System.out.println("Position de la chaine de départ \" " + chaine + " \" : " + positionChaine);
+        //System.out.println("Position de la chaine de départ \" " + chaine + " \" : " + positionChaine);
     }
     
     public void affichageTableur(String pretexte, ArrayList<ArrayList<Integer>> al)
@@ -123,7 +123,7 @@ public class BurrowsWheelerTransform {
         }
         
         System.out.println("Mot encodée : " + leCode);
-        System.out.println("Code : " + code);
+        System.out.println("Mot encodée : " + code);
         
     }
     
@@ -133,13 +133,13 @@ public class BurrowsWheelerTransform {
         //Trie du code
         codeSort = new ArrayList<>(code);
         Collections.sort(codeSort);
-        System.out.println("Code trié : " + codeSort);
+        /*System.out.println("Code trié : " + codeSort);
         
         System.out.println("Position :  0  1  2  3  4 ");
         System.out.println("Code     : " + code);
-        System.out.println("CodeSort : " + codeSort);
+        System.out.println("CodeSort : " + codeSort);*/
         chaineDecodee = new ArrayList<>(TAILLEMOT);
-        int posi = positionChaine, dernierePos = 0, nbOccu = 1, c = 0;
+        int posi = positionChaine, nbOccu = 1, c = 0;
         
         for(int i=0 ; i<TAILLEMOT ; i++)
         {
@@ -150,7 +150,7 @@ public class BurrowsWheelerTransform {
             chaineDecodee.add(c);
 
             //On regarde l'occurence de cette lettre dans codeSort jusqu'à posSort mais pas au delà --> nbOccu
-            nbOccu = Collections.frequency(codeSort.subList(0, posi+1), c);System.out.println("Occu de " + c +" " + nbOccu);
+            nbOccu = Collections.frequency(codeSort.subList(0, posi+1), c);//System.out.println("Occu de " + c +" " + nbOccu);
 
             //On récupère la position dans code de cette lettre à la nbOccu ieme fois ( nbOccu = 2 --> donc la 2nde occurence)
             int debut = 0;
