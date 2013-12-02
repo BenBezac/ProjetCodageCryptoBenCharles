@@ -71,7 +71,7 @@ public class Arbre implements Comparable<Arbre> {
     }
     
     /**
-     * Retourne le codage binary de l'arbre
+     * Retourne le codage binaire de l'arbre
      * @return 
      */
     public ArrayList<ArrayList> codageTabBinary ()
