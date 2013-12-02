@@ -20,7 +20,7 @@ public class ProjetCodageCrypto {
         Ascii as = new Ascii();
         as.initAscii();
         String test = "TEXTE";
-        ArrayList<Integer> codeBWT, decodeBWT, codeMTF, decodeMTF;
+        ArrayList<Integer> codeBWT, decodeBWT, codeMTF, decodeMTF, codeHuff, decodeHuff;
         BurrowsWheelerTransform b = new BurrowsWheelerTransform(as);
         
         System.out.println("Texte à coder : " + test);
