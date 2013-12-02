@@ -4,6 +4,7 @@
  */
 package projetcodagecrypto;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -16,10 +17,10 @@ public class ProjetCodageCrypto {
     
     
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Ascii as = new Ascii();
         as.initAscii();
-        String test = "Coucou les amis !!!";
+        String test = "Coucou les amis";
         ArrayList<Integer> codeBWT, decodeBWT, codeMTF, decodeMTF, decodeHuff;
         BurrowsWheelerTransform b = new BurrowsWheelerTransform(as);
         
@@ -51,8 +52,4 @@ public class ProjetCodageCrypto {
         decodeBWT = new ArrayList<Integer>(b.decodage(decodeMTF));
         System.out.println(as.deconversionASCII(decodeBWT));
     }
-    
-    
-  
-
 }
