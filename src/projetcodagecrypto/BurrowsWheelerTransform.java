@@ -14,53 +14,38 @@ import java.util.Comparator;
  */
 public class BurrowsWheelerTransform {
     private ArrayList<ArrayList<Integer>> tableurNonTrie, tableurTrie;
-    private ArrayList<Integer> chaine, chaineDecodee, code, codeSort;
-    private ArrayList<Integer> position;
+    private ArrayList<Integer> chaine,position;
     private int positionChaine;
-    private final int TAILLEMOT;
-    private String leCode = "", motACoder;
+    private int tailleMot;
+    private String leCode = "";
     private int carac;
     private Ascii ascii;
 
     
-    public BurrowsWheelerTransform(String mot, Ascii as)
+    public BurrowsWheelerTransform(Ascii as)
     {
-        motACoder = mot;
         ascii = as; 
-        TAILLEMOT = motACoder.length();
-        conversionASCII();
-        init();
-        //Ajout du mot dans la premiere ligne du tableur
-        tableurNonTrie.add(0,chaine);
+        init(as);
         
     }
     
-    /*
-     * Converti le mot de type String en type ArrayList de Int pour y stocker les valeurs ASCII des caractères du mot
-     */
-    public void conversionASCII()
-    {
-        char[] tabchar = motACoder.toCharArray();
-        chaine = new ArrayList<>();
-        
-        for( int i=0 ; i < TAILLEMOT ; i++)
-        {
-            chaine.add((int)tabchar[i]);
-        }
-    }
+   
     
     /*
      * Trie le tableur pour chaque ligne/mot, et stocke dans position la position de départ de chaque ligne
      */
-    public void trieTableur()
+    private void trieTableur(String motACoder)
     {
         
+        chaine = new ArrayList<Integer>(ascii.conversionASCII(motACoder));
+        //Ajout du mot dans la premiere ligne du tableur
+        tableurNonTrie.add(0,chaine);
         //on boucle pour toutes les autres lignes du tableur pour décaler à chaque fois un caractère abc --> cab --> bca
-        for(int i=1 ; i < TAILLEMOT ; i++)
+        for(int i=1 ; i < tailleMot ; i++)
         {
             tableurNonTrie.add(i, new ArrayList<Integer>(tableurNonTrie.get(i-1)));
-            carac = tableurNonTrie.get(i).get(TAILLEMOT-1);
-            tableurNonTrie.get(i).remove(TAILLEMOT-1);
+            carac = tableurNonTrie.get(i).get(tailleMot-1);
+            tableurNonTrie.get(i).remove(tailleMot-1);
             tableurNonTrie.get(i).add(0, carac);
         }
         /*
@@ -109,8 +94,11 @@ public class BurrowsWheelerTransform {
         System.out.println("]");
     }
     
-    public void encodage()
+    public ArrayList<Integer> encodage(String motACoder)
     {
+        tailleMot = motACoder.length();        
+        trieTableur(motACoder);
+        ArrayList<Integer> code = new ArrayList<Integer>();
         //Ajout de la position du mot de depart
         //code.add(String.valueOf(positionChaine).charAt(0));
         leCode = positionChaine +"";
@@ -118,30 +106,28 @@ public class BurrowsWheelerTransform {
         //Ajout de chaque dernier caractere de chaque ligne du tableur
         for(ArrayList<Integer> mot : tableurTrie)
         {
-            leCode += mot.get(TAILLEMOT-1);
-            code.add(mot.get(TAILLEMOT-1));
+            leCode += mot.get(tailleMot-1);
+            code.add(mot.get(tailleMot-1));
         }
         
-        System.out.println("Mot encodée : " + leCode);
-        System.out.println("Mot encodée : " + code);
-        
+        return code;
     }
     
-    public void decodage()
+    public ArrayList<Integer> decodage(ArrayList<Integer> codeADecoder)
     {
-        
+        ArrayList<Integer> codeSort = new ArrayList<Integer>();        
+        ArrayList<Integer> chaineDecodee = new ArrayList<Integer>();
         //Trie du code
-        codeSort = new ArrayList<>(code);
+        codeSort = new ArrayList<>(codeADecoder);
         Collections.sort(codeSort);
         /*System.out.println("Code trié : " + codeSort);
         
         System.out.println("Position :  0  1  2  3  4 ");
         System.out.println("Code     : " + code);
         System.out.println("CodeSort : " + codeSort);*/
-        chaineDecodee = new ArrayList<>(TAILLEMOT);
         int posi = positionChaine, nbOccu = 1, c = 0;
         
-        for(int i=0 ; i<TAILLEMOT ; i++)
+        for(int i=0 ; i<tailleMot ; i++)
         {
             //On regarde la lettre à la position posi dans codeSort
             c = codeSort.get(posi);
@@ -157,41 +143,27 @@ public class BurrowsWheelerTransform {
             
             for(int j=0 ; j < nbOccu ; j++)
             {
-                posi = code.subList(debut, TAILLEMOT).indexOf(c) + debut;
+                posi = codeADecoder.subList(debut, tailleMot).indexOf(c) + debut;
                 debut = posi + 1;
             }
         }
-        String chaineDecodeeString = "";
-        for(Integer lettre : chaineDecodee)
-        {
-            chaineDecodeeString += ascii.getTableAscii().get(lettre);
-        }
-        System.out.println("Chaine décodée : " + chaineDecodeeString);
-        System.out.println("Chaine décodée : " + chaineDecodee);
-               
         
+        return chaineDecodee;
     }
     
     /*
      * Permet d'intialiser les ArrayList et autres variables
      */
-    public void init()
+    public void init(Ascii as)
     {
-        
-         tableurNonTrie = new ArrayList<ArrayList<Integer>>(TAILLEMOT); 
-         position = new ArrayList<Integer>(TAILLEMOT); 
-         code = new ArrayList<Integer>(TAILLEMOT); 
-         codeSort = new ArrayList<Integer>(TAILLEMOT); 
-         chaineDecodee = new ArrayList<Integer>(TAILLEMOT); 
+         tableurNonTrie = new ArrayList<ArrayList<Integer>>(tailleMot); 
+         position = new ArrayList<Integer>(tailleMot); 
          
          positionChaine = 0;
          carac=' ';
     }
     
-    public ArrayList<Integer> getCode()
-    {
-       return code;
-    }
+    
     
     public int getPosition()
     {

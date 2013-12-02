@@ -19,17 +19,28 @@ public class ProjetCodageCrypto {
     public static void main(String[] args) {
         Ascii as = new Ascii();
         as.initAscii();
-        String test = "La crypto ça sucks !";
-        BurrowsWheelerTransform b = new BurrowsWheelerTransform(test, as);
-        b.trieTableur();
-        b.encodage();
+        String test = "TEXTE";
+        ArrayList<Integer> codeBWT, decodeBWT, codeMTF, decodeMTF;
+        BurrowsWheelerTransform b = new BurrowsWheelerTransform(as);
         
-        System.out.println("\n##################### MVT #####################\n");
-        MoveToFront mvt = new MoveToFront(b.getCode(), b.getPosition(),as);
+        System.out.println("Texte à coder : " + test);
         
+        System.out.println("\n##################### Encodage BWT #####################\n");
+        codeBWT = new ArrayList<Integer>(b.encodage(test));
+        System.out.println(as.deconversionASCII(codeBWT));
         
-        System.out.println("\n###############################################\n");
-        b.decodage();
+        System.out.println("\n##################### Encodage MVT #####################\n");
+        MoveToFront mvt = new MoveToFront(b.getPosition(),as);
+        codeMTF = new ArrayList<Integer>(mvt.compressionMTF(codeBWT));        
+        System.out.println(codeMTF);
+        
+        System.out.println("\n##################### Decodage MVT #####################\n");
+        decodeMTF = new ArrayList<Integer>(mvt.decompressionMTF(codeMTF));        
+        System.out.println(as.deconversionASCII(decodeMTF));
+        
+        System.out.println("\n##################### Decodage BWT #####################\n");
+        decodeBWT = new ArrayList<Integer>(b.decodage(decodeMTF));
+        System.out.println(as.deconversionASCII(decodeBWT));
     }
     
     

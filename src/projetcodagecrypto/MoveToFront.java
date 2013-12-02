@@ -12,31 +12,60 @@ import java.util.ArrayList;
  */
 public class MoveToFront {
     
-    private ArrayList<Integer> mot;
     private int position;
     private Ascii ascii;
     private ArrayList<Integer> tableau;
     
-    public MoveToFront(ArrayList<Integer> m, int pos, Ascii as)
+    public MoveToFront(int pos, Ascii as)
     {
-        mot = new ArrayList<>(m);
         ascii = as;
-        tableau = new ArrayList<>();
-        for(int i=0 ; i<256 ; i++)
-            tableau.add(i);
+        initTableau();
         position = pos;
     }
     
-    public void compressionMTV()
+    
+    public void initTableau()
     {
-        for(int chiff : mot)
+        tableau = new ArrayList<>();
+        for(int i=0 ; i<256 ; i++)
+            tableau.add(i);
+    }
+    public ArrayList<Integer> compressionMTF(ArrayList<Integer> mot)
+    {
+        ArrayList<Integer> code = new ArrayList<Integer>();
+        for(int lettre : mot)
         {
+            code.add(tableau.indexOf(lettre));
             //si c'est la première lettre du tableau pas besoin de bouger sinon oui
-            if(chiff != tableau.get(0))
+            if(lettre != tableau.get(0))
             {
-                tableau.remove(tableau.get(chiff));
-                tableau.add(0, chiff);
+                tableau.remove(tableau.get(lettre));
+                tableau.add(0, lettre);
             }
         }
+        /*System.out.println("Tableau : " + tableau);
+        System.out.println("Code obtenu avec MVT :" + code);
+        */
+        return code;
+    }
+    
+    public ArrayList<Integer> decompressionMTF(ArrayList<Integer> code)
+    {
+        ArrayList<Integer> decode = new ArrayList<Integer>();
+        initTableau();
+        for(int chiffre : code)
+        {
+            Integer lettre = tableau.get(chiffre);
+            decode.add(tableau.get(chiffre));
+            
+            //si c'est la première lettre du tableau pas besoin de bouger sinon oui
+            if(chiffre != 0)
+            {                
+                tableau.remove(lettre);
+                tableau.add(0, lettre);
+            }
+            
+        }
+        return decode;
     }
 }
