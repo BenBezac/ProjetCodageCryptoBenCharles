@@ -19,8 +19,8 @@ public class ProjetCodageCrypto {
     public static void main(String[] args) {
         Ascii as = new Ascii();
         as.initAscii();
-        String test = "TEXTE";
-        ArrayList<Integer> codeBWT, decodeBWT, codeMTF, decodeMTF, codeHuff, decodeHuff;
+        String test = "Coucou les amis !!!";
+        ArrayList<Integer> codeBWT, decodeBWT, codeMTF, decodeMTF, decodeHuff;
         BurrowsWheelerTransform b = new BurrowsWheelerTransform(as);
         
         System.out.println("Texte à coder : " + test);
@@ -34,9 +34,14 @@ public class ProjetCodageCrypto {
         codeMTF = new ArrayList<Integer>(mvt.compressionMTF(codeBWT));        
         System.out.println(codeMTF);
         
-        //T es la charles
-        codeHuff = new ArrayList<Integer>(codeMTF);
-        decodeHuff = new ArrayList<Integer>(codeHuff);
+        System.out.println("\n##################### Codage Huffman #####################\n");
+        Huffman hf = new Huffman(codeMTF);
+        String codeHuff = hf.coder();
+        System.out.println(codeHuff);
+        
+        System.out.println("\n##################### Decodage Huffman #####################\n");
+        decodeHuff = new ArrayList<Integer>(hf.decoder(codeHuff));
+        hf.afficherDecoder(decodeHuff);
         
         System.out.println("\n##################### Decodage MVT #####################\n");
         decodeMTF = new ArrayList<Integer>(mvt.decompressionMTF(decodeHuff));        
