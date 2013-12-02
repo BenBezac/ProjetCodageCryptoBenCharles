@@ -34,8 +34,12 @@ public class ProjetCodageCrypto {
         codeMTF = new ArrayList<Integer>(mvt.compressionMTF(codeBWT));        
         System.out.println(codeMTF);
         
+        //T es la charles
+        codeHuff = new ArrayList<Integer>(codeMTF);
+        decodeHuff = new ArrayList<Integer>(codeHuff);
+        
         System.out.println("\n##################### Decodage MVT #####################\n");
-        decodeMTF = new ArrayList<Integer>(mvt.decompressionMTF(codeMTF));        
+        decodeMTF = new ArrayList<Integer>(mvt.decompressionMTF(decodeHuff));        
         System.out.println(as.deconversionASCII(decodeMTF));
         
         System.out.println("\n##################### Decodage BWT #####################\n");
