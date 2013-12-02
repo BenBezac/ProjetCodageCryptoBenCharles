@@ -33,13 +33,13 @@ public class MoveToFront {
     public ArrayList<Integer> compressionMTF(ArrayList<Integer> mot)
     {
         ArrayList<Integer> code = new ArrayList<Integer>();
-        for(int lettre : mot)
+        for(Integer lettre : mot)
         {
             code.add(tableau.indexOf(lettre));
             //si c'est la première lettre du tableau pas besoin de bouger sinon oui
             if(lettre != tableau.get(0))
             {
-                tableau.remove(tableau.get(lettre));
+                tableau.remove(lettre);
                 tableau.add(0, lettre);
             }
         }
