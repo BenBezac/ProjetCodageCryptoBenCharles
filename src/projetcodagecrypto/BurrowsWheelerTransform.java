@@ -109,7 +109,7 @@ public class BurrowsWheelerTransform {
             leCode += mot.get(tailleMot-1);
             code.add(mot.get(tailleMot-1));
         }
-        
+
         return code;
     }
     
