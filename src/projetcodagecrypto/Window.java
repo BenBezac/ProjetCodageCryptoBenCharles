@@ -1,5 +1,6 @@
 package projetcodagecrypto;
 
+import static java.lang.Math.ceil;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -43,17 +44,37 @@ public class Window extends javax.swing.JFrame {
         jButtonOuvrirFile = new javax.swing.JButton();
         jTextFieldNameFile = new javax.swing.JTextField();
         jPanelResCompression = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextAreaEncodageBW = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextAreaEncodageMVT = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        jTextAreaEncodageHuffman = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jProgressBarCompression = new javax.swing.JProgressBar();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabelTailleChaineDebut = new javax.swing.JLabel();
+        jLabelTailleChaineFin = new javax.swing.JLabel();
+        jLabelTxCompression = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTextAreaEncodageBW = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
+        jPanelResDecompression = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextAreaDecodageHuffman = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextAreaDecodageMVT = new javax.swing.JTextArea();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextAreaDecodageBW = new javax.swing.JTextArea();
+        jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Projet de compression/decompression");
         setResizable(false);
 
         jTextAreaChaineACompresser.setColumns(20);
@@ -87,117 +108,239 @@ public class Window extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jButtonCompresser, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78)
+                .addGap(118, 118, 118)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jTextFieldNameFile, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonOuvrirFile, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonOuvrirFile, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(jButtonCompresser, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(jButtonCompresser, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldNameFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonOuvrirFile))
-                .addGap(0, 85, Short.MAX_VALUE))
+                .addGap(0, 99, Short.MAX_VALUE))
         );
-
-        jScrollPane2.setPreferredSize(new java.awt.Dimension(100, 107));
-
-        jTextAreaEncodageBW.setColumns(20);
-        jTextAreaEncodageBW.setRows(5);
-        jTextAreaEncodageBW.setRequestFocusEnabled(false);
-        jScrollPane2.setViewportView(jTextAreaEncodageBW);
 
         jTextAreaEncodageMVT.setColumns(20);
         jTextAreaEncodageMVT.setRows(5);
         jTextAreaEncodageMVT.setRequestFocusEnabled(false);
         jScrollPane3.setViewportView(jTextAreaEncodageMVT);
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane4.setViewportView(jTextArea3);
+        jTextAreaEncodageHuffman.setColumns(20);
+        jTextAreaEncodageHuffman.setRows(5);
+        jScrollPane4.setViewportView(jTextAreaEncodageHuffman);
 
         jButton1.setText("Décompresser");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setText("Statistiques : ");
+        jLabel5.setText("Encodage Move To Front : ");
+
+        jLabel6.setText("Encodage de Huffman : ");
+
+        jLabel7.setText("Taille départ (bytes) : ");
+
+        jLabel8.setText("Taille après codage (bytes) : ");
+
+        jLabel9.setText("Taux de compression : ");
+
+        jTextAreaEncodageBW.setColumns(20);
+        jTextAreaEncodageBW.setRows(5);
+        jScrollPane9.setViewportView(jTextAreaEncodageBW);
+
+        jLabel4.setText("Encodage Burrows Wheeler : ");
 
         javax.swing.GroupLayout jPanelResCompressionLayout = new javax.swing.GroupLayout(jPanelResCompression);
         jPanelResCompression.setLayout(jPanelResCompressionLayout);
         jPanelResCompressionLayout.setHorizontalGroup(
             jPanelResCompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelResCompressionLayout.createSequentialGroup()
+            .addGroup(jPanelResCompressionLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(jPanelResCompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelResCompressionLayout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelResCompressionLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addGroup(jPanelResCompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jProgressBarCompression, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanelResCompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jProgressBarCompression, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                            .addGroup(jPanelResCompressionLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelResCompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelTailleChaineDebut)
+                                    .addComponent(jLabelTailleChaineFin)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelResCompressionLayout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addComponent(jLabelTxCompression))))
+                    .addGroup(jPanelResCompressionLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(113, 113, 113)
                 .addGroup(jPanelResCompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32))
+                    .addGroup(jPanelResCompressionLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelResCompressionLayout.createSequentialGroup()
+                        .addGroup(jPanelResCompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4)
+                            .addGroup(jPanelResCompressionLayout.createSequentialGroup()
+                                .addGroup(jPanelResCompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane9))
+                        .addGap(39, 39, 39))))
         );
         jPanelResCompressionLayout.setVerticalGroup(
             jPanelResCompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelResCompressionLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelResCompressionLayout.createSequentialGroup()
+                .addGap(0, 105, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75)
+                .addGroup(jPanelResCompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabelTailleChaineDebut))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelResCompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabelTailleChaineFin))
+                .addGap(13, 13, 13)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelResCompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelResCompressionLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelResCompressionLayout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanelResCompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelResCompressionLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelResCompressionLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addGap(44, 44, 44)))
-                .addGroup(jPanelResCompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jProgressBarCompression, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addComponent(jProgressBarCompression, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTxCompression))
+                .addGap(26, 26, 26))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelResCompressionLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+        );
+
+        jTextAreaDecodageHuffman.setColumns(20);
+        jTextAreaDecodageHuffman.setRows(5);
+        jScrollPane5.setViewportView(jTextAreaDecodageHuffman);
+
+        jTextAreaDecodageMVT.setColumns(20);
+        jTextAreaDecodageMVT.setRows(5);
+        jScrollPane6.setViewportView(jTextAreaDecodageMVT);
+
+        jTextAreaDecodageBW.setColumns(20);
+        jTextAreaDecodageBW.setRows(5);
+        jScrollPane7.setViewportView(jTextAreaDecodageBW);
+
+        jButton2.setText("Retour accueil");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Décodage de Huffman : ");
+
+        jLabel10.setText("Décodage Move To Front : ");
+
+        jLabel11.setText("Chaine de départ : ");
+
+        javax.swing.GroupLayout jPanelResDecompressionLayout = new javax.swing.GroupLayout(jPanelResDecompression);
+        jPanelResDecompression.setLayout(jPanelResDecompressionLayout);
+        jPanelResDecompressionLayout.setHorizontalGroup(
+            jPanelResDecompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelResDecompressionLayout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addGroup(jPanelResDecompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(66, 66, 66))
+        );
+        jPanelResDecompressionLayout.setVerticalGroup(
+            jPanelResDecompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelResDecompressionLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelResDecompressionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelResDecompressionLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelResDecompressionLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel11)
+                        .addGap(4, 4, 4)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelResCompression, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 7, Short.MAX_VALUE)
+                    .addComponent(jPanelResDecompression, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 6, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelResCompression, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanelResDecompression, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -228,32 +371,71 @@ public class Window extends javax.swing.JFrame {
         else
         {
             as.initAscii();
-            BurrowsWheelerTransform b = new BurrowsWheelerTransform(as);
+            this.b = new BurrowsWheelerTransform(as);
 
             if (!this.jTextAreaChaineACompresser.getText().isEmpty())
             {
-                this.codeBWT = b.encodage(this.jTextAreaChaineACompresser.getText());
+                this.codeBWT = this.b.encodage(this.jTextAreaChaineACompresser.getText());
+                this.tailleChaineDepart = this.jTextAreaChaineACompresser.getText().length();
+            }
+            else 
+            {
+                ReadFile rd = new ReadFile();
+                String chaine = rd.readFile(this.jTextFieldNameFile.getText());
+                this.codeBWT = this.b.encodage(chaine);
+                this.tailleChaineDepart = chaine.length();
             }
 
-            MoveToFront mvt = new MoveToFront(b.getPosition(),as);
-            this.codeMTF = mvt.compressionMTF(codeBWT); 
+            this.mvt = new MoveToFront(b.getPosition(),as);
+            this.codeMTF = this.mvt.compressionMTF(codeBWT);
+
+            this.hf = new Huffman(this.codeMTF);
+            this.codeHuffman = hf.coder();
+
+            this.tailleChaineFin = ceil((double)this.codeHuffman.length()/8);
 
             this.affichageCompression();
         }
     }//GEN-LAST:event_jButtonCompresserActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.decodeHuff = hf.decoder(this.codeHuffman);
+        this.decodeMTF = mvt.decompressionMTF(this.decodeHuff);  
+        this.decodeBWT = b.decodage(this.decodeMTF);
+        
+        this.jTextAreaDecodageHuffman.setText(this.decodeHuff.toString());
+        this.jTextAreaDecodageMVT.setText(this.decodeMTF.toString());
+        this.jTextAreaDecodageBW.setText(as.deconversionASCII(this.decodeBWT));
+        
+        this.jPanelResCompression.setVisible(false);
+        this.jPanelResDecompression.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.jPanelResDecompression.setVisible(false);
+        this.jTextAreaChaineACompresser.setText(null);
+        this.jTextFieldNameFile.setText(null);
+        this.jPanel1.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void affichageCompression()
     {
         this.jPanel1.setVisible(false);
         this.jTextAreaEncodageBW.setText(this.as.deconversionASCII(this.codeBWT));
         this.jTextAreaEncodageMVT.setText(this.codeMTF.toString());
-        this.jProgressBarCompression.setValue(50);
+        this.jTextAreaEncodageHuffman.setText(codeHuffman);
+        this.jLabelTailleChaineDebut.setText(String.valueOf((int)this.tailleChaineDepart));
+        this.jLabelTailleChaineFin.setText(String.valueOf((int)this.tailleChaineFin));
+        double pourcentage = (1 - (this.tailleChaineFin / this.tailleChaineDepart)) * 100;
+        this.jLabelTxCompression.setText(String.valueOf((int)pourcentage) + "%");
+        this.jProgressBarCompression.setValue((int)pourcentage);
         this.jPanelResCompression.setVisible(true);
     }
     
     private void myInitComponents()
     {
         this.jPanelResCompression.setVisible(false);
+        this.jPanelResDecompression.setVisible(false);
         this.jFileChooserFichierACompresser = new javax.swing.JFileChooser(); 
     }
     
@@ -294,24 +476,49 @@ public class Window extends javax.swing.JFrame {
 
     private javax.swing.JFileChooser jFileChooserFichierACompresser;
     private Ascii as = new Ascii();
+    private BurrowsWheelerTransform b;
+    private MoveToFront mvt;
+    private Huffman hf;
     private ArrayList<Integer> codeBWT, decodeBWT, codeMTF, decodeMTF, decodeHuff;
+    private String codeHuffman;
+    private double tailleChaineDepart;
+    private double tailleChaineFin;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonCompresser;
     private javax.swing.JButton jButtonOuvrirFile;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelTailleChaineDebut;
+    private javax.swing.JLabel jLabelTailleChaineFin;
+    private javax.swing.JLabel jLabelTxCompression;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelResCompression;
+    private javax.swing.JPanel jPanelResDecompression;
     private javax.swing.JProgressBar jProgressBarCompression;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextArea jTextAreaChaineACompresser;
+    private javax.swing.JTextArea jTextAreaDecodageBW;
+    private javax.swing.JTextArea jTextAreaDecodageHuffman;
+    private javax.swing.JTextArea jTextAreaDecodageMVT;
     private javax.swing.JTextArea jTextAreaEncodageBW;
+    private javax.swing.JTextArea jTextAreaEncodageHuffman;
     private javax.swing.JTextArea jTextAreaEncodageMVT;
     private javax.swing.JTextField jTextFieldNameFile;
     // End of variables declaration//GEN-END:variables

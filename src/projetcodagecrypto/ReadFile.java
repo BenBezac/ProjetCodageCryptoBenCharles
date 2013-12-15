@@ -6,16 +6,15 @@
 
 package projetcodagecrypto;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  *
@@ -32,13 +31,25 @@ public class ReadFile {
     private DataOutputStream ecrire;
     private DataInputStream lire;
     
-    public ReadFile(String name) throws FileNotFoundException
+    public String readFile(String nameFile)
     {
-        this.fichier = new File(name);
-        this.bits = 0;
-        this.offSet = 0;
-        this.ecrire = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(this.fichier)));
-        this.lire = new DataInputStream(new BufferedInputStream(new FileInputStream(this.fichier)));
+        String chaine = "";
+        
+        try {
+            InputStream ips = new FileInputStream(nameFile);
+            InputStreamReader ipsr = new InputStreamReader(ips);
+            BufferedReader br = new BufferedReader(ipsr);
+            String ligne;
+            while ((ligne = br.readLine()) != null) {
+                chaine += ligne + "\n";
+            }
+            br.close();
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        
+        return chaine;
     }
     
     public void write(String chaine) throws IOException
